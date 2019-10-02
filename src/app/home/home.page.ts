@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,16 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {}
+  articles;
+  
+  constructor(private apiService: ApiService){}
 
+  ionViewDidEnter(){
+
+    this.apiService.getNews().subscribe((data)=>{
+      console.log(data);
+      this.articles = data['articles'];
+    });
+  }
 }
+
